@@ -1,31 +1,127 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Reset Password</title>
-    <script>
-      function getQueryParam(name) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(name);
-      }
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reset Password</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #5A54B2;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: left;
+    }
 
-      function populateContent() {
-        const userId = getQueryParam('userId');
-        const secret = getQueryParam('secret');
-        if (userId && secret) {
-          document.getElementById('content').innerText =
-            `Please navigate back to the app and enter these values:\n\nUser ID: ${userId}\nSecret: ${secret}`;
-        } else {
-          document.getElementById('content').innerText =
-            'Missing parameters. Please make sure the link is complete.';
-        }
-      }
+    .container {
+      width: 80%;
+      max-width: 500px;
+    }
 
-      window.onload = populateContent;
-    </script>
-  </head>
-  <body>
-    <h2>Password Reset Info</h2>
-    <pre id="content">Loading...</pre>
-  </body>
+    .logo {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 24px;
+      padding-left: 10%;
+      padding-right: 10%;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    .field-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .label {
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .value-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .value {
+      font-weight: 400;
+      word-break: break-all;
+      flex: 1;
+    }
+
+    .copy-btn {
+      background-color: white;
+      color: #5A54B2;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .copy-btn:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img
+      src="https://raw.githubusercontent.com/serhanyrlmz/HMU-reset-password/refs/heads/main/hitmeup-logo.png"
+      alt="Hit Me Up Logo"
+      class="logo"
+    />
+
+    <h2>Please navigate back to the Hit Me Up and enter these values in the app:</h2>
+
+    <div class="field-group">
+      <div class="label">User ID:</div>
+      <div class="value-row">
+        <div id="userId" class="value"></div>
+        <button class="copy-btn" onclick="copyToClipboard('userId')">Copy</button>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <div class="label">Secret:</div>
+      <div class="value-row">
+        <div id="secret" class="value"></div>
+        <button class="copy-btn" onclick="copyToClipboard('secret')">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function copyToClipboard(elementId) {
+      const text = document.getElementById(elementId).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert(`${elementId} copied to clipboard!`);
+      }).catch(err => {
+        alert("Failed to copy: " + err);
+      });
+    }
+
+    document.getElementById("userId").textContent = getQueryParam("userId") || "Not provided";
+    document.getElementById("secret").textContent = getQueryParam("secret") || "Not provided";
+  </script>
+</body>
 </html>
