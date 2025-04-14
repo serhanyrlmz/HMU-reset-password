@@ -35,9 +35,9 @@
     }
 
     h2 {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 400;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2.5rem; /* Includes extra line spacing */
     }
 
     .field-group {
@@ -45,6 +45,7 @@
     }
 
     .label {
+      font-size: 1.1rem;
       font-weight: 700;
       margin-bottom: 0.3rem;
     }
@@ -58,19 +59,17 @@
 
     .value {
       font-weight: 400;
-      word-break: break-all;
+      font-size: 0.95rem;
+      word-break: break-word;
       flex: 1;
     }
 
     .copy-btn {
-      background-color: white;
-      color: #5A54B2;
+      background: none;
       border: none;
-      border-radius: 4px;
-      padding: 4px 8px;
-      font-weight: 600;
-      font-size: 0.8rem;
+      font-size: 1.2rem;
       cursor: pointer;
+      color: #5A54B2; /* Match background */
     }
 
     .copy-btn:active {
@@ -92,7 +91,7 @@
       <div class="label">User ID:</div>
       <div class="value-row">
         <div id="userId" class="value"></div>
-        <button class="copy-btn" onclick="copyToClipboard('userId')">Copy</button>
+        <button class="copy-btn" onclick="copyToClipboard('userId')">📋</button>
       </div>
     </div>
 
@@ -100,7 +99,7 @@
       <div class="label">Secret:</div>
       <div class="value-row">
         <div id="secret" class="value"></div>
-        <button class="copy-btn" onclick="copyToClipboard('secret')">Copy</button>
+        <button class="copy-btn" onclick="copyToClipboard('secret')">📋</button>
       </div>
     </div>
   </div>
