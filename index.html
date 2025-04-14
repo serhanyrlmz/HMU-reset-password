@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reset Password</title>
+    <script>
+      function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      function populateContent() {
+        const userId = getQueryParam('userId');
+        const secret = getQueryParam('secret');
+        if (userId && secret) {
+          document.getElementById('content').innerText =
+            `Please navigate back to the app and enter these values:\n\nUser ID: ${userId}\nSecret: ${secret}`;
+        } else {
+          document.getElementById('content').innerText =
+            'Missing parameters. Please make sure the link is complete.';
+        }
+      }
+
+      window.onload = populateContent;
+    </script>
+  </head>
+  <body>
+    <h2>Password Reset Info</h2>
+    <pre id="content">Loading...</pre>
+  </body>
+</html>
