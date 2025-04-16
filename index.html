@@ -6,22 +6,26 @@
   <title>Reset Password</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
+      overflow: hidden;
       background-color: #5A54B2;
-      color: white;
       font-family: 'Inter', sans-serif;
+      color: white;
+    }
+
+    body {
       display: flex;
-      align-items: center;
       justify-content: center;
-      height: 100vh;
-      text-align: left;
+      align-items: center;
     }
 
     .container {
       width: 80%;
       max-width: 500px;
+      text-align: left;
     }
 
     .logo {
@@ -37,7 +41,7 @@
     h2 {
       font-size: 1.1rem;
       font-weight: 400;
-      margin-bottom: 2.5rem; /* Includes extra line spacing */
+      margin-bottom: 2.5rem;
     }
 
     .field-group {
@@ -69,11 +73,12 @@
       border: none;
       font-size: 1.2rem;
       cursor: pointer;
-      color: #5A54B2; /* Match background */
+      color: #5A54B2;
+      transition: transform 0.1s ease;
     }
 
     .copy-btn:active {
-      transform: scale(0.95);
+      transform: scale(0.85);
     }
   </style>
 </head>
@@ -91,7 +96,7 @@
       <div class="label">User ID:</div>
       <div class="value-row">
         <div id="userId" class="value"></div>
-        <button class="copy-btn" onclick="copyToClipboard('userId')">📋</button>
+        <button class="copy-btn" id="copy-userId" onclick="copyToClipboard('userId', 'copy-userId')">📋</button>
       </div>
     </div>
 
@@ -99,28 +104,9 @@
       <div class="label">Secret:</div>
       <div class="value-row">
         <div id="secret" class="value"></div>
-        <button class="copy-btn" onclick="copyToClipboard('secret')">📋</button>
+        <button class="copy-btn" id="copy-secret" onclick="copyToClipboard('secret', 'copy-secret')">📋</button>
       </div>
     </div>
   </div>
 
   <script>
-    function getQueryParam(name) {
-      const params = new URLSearchParams(window.location.search);
-      return params.get(name);
-    }
-
-    function copyToClipboard(elementId) {
-      const text = document.getElementById(elementId).textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        alert(`${elementId} copied to clipboard!`);
-      }).catch(err => {
-        alert("Failed to copy: " + err);
-      });
-    }
-
-    document.getElementById("userId").textContent = getQueryParam("userId") || "Not provided";
-    document.getElementById("secret").textContent = getQueryParam("secret") || "Not provided";
-  </script>
-</body>
-</html>
