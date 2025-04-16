@@ -107,3 +107,34 @@
         <button class="copy-btn" id="copy-secret" onclick="copyToClipboard('secret', 'copy-secret')">📋</button>
       </div>
     </div>
+  </div>
+
+  <script>
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function copyToClipboard(valueId, buttonId) {
+      const text = document.getElementById(valueId).textContent;
+      const button = document.getElementById(buttonId);
+
+      navigator.clipboard.writeText(text).then(() => {
+        button.textContent = '✅';
+        button.style.transform = 'scale(0.85)';
+        setTimeout(() => {
+          button.textContent = '📋';
+          button.style.transform = 'scale(1)';
+        }, 1500);
+      }).catch(() => {
+        // fail silently
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("userId").textContent = getQueryParam("userId") || "Not provided";
+      document.getElementById("secret").textContent = getQueryParam("secret") || "Not provided";
+    });
+  </script>
+</body>
+</html>
